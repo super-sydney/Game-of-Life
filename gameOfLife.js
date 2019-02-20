@@ -50,13 +50,19 @@ function init(){
 						this.value = 0;
 					}
 				};
-				b.style = "background-color: white; border: 2px solid black; width: 50px; height: 50px;"
-				b.value = 0;
+				b.style = "background-color: white; border: 2px solid black; width: "+WIDTH+"px; height: "+HEIGHT+"px;"
+				b.value = 0;		
+					if (seed){
+						b.value = seed[5][i][j];
+						b.style.backgroundColor = b.value === "1" ? "black" : "white"
+					}
 				document.getElementById("setup").append(b);
 			}
 			document.getElementById("setup").append(document.createElement("br"));
 		}
 		document.getElementById("initial").style.display = "none";
+		document.getElementById("text").style.display = "none";
+		document.getElementById("edit").style.display = "initial";
 	}else{
 		alert("Something went very wrong");
 		console.log(width, height, WIDTH, HEIGHT, freq)
@@ -77,19 +83,15 @@ function submit(){
 		}
 	}
 
+	document.getElementById("edit").style.display = "none";
 	document.getElementById("submit").style.display = "none";
 	document.getElementById("setup").style.display = "none";
-	document.getElementById("next").style.display = "initial";
+	document.getElementById("controls").style.display = "initial";
 
-	if (seed && seed.constructor == Array){
-		g = new Game(width, height, seed[5]);
-	}else{
-		g = new Game(width, height, arr);
-	}
+	g = new Game(width, height, arr);
 
 	g.draw();
 	document.getElementById("freqSlider").value = freq;
-	document.getElementById("freqSlider").style.display = "initial";
 	if (freq !== 0){
 		interval = setInterval(function(){g.next()}, freq*1000);
 	}
