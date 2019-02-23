@@ -1,7 +1,7 @@
 var canv = document.getElementById("canv"), c = canv.getContext("2d"), 
 	WIDTH = 50, HEIGHT = 50;
 
-var g, width = 10, height = 10, freq = 0, seed, interval;
+var g, width = 10, height = 10, freq = 0, seed, empty, interval;
 
 function init(){
 	width = 10; 
@@ -73,8 +73,10 @@ function submit(){
 	var buttons = document.getElementById("setup").getElementsByTagName("button"), arr = [], counter = 0;
 
 	for (var i = 0; i < height; i++){
-		arr.push(new Array(width));
+		arr.push(new Array(width).fill(0));
 	}
+
+	empty = JSON.parse(JSON.stringify(arr));
 
 	for (var i = 0; i < height; i++){
 		for (var j = 0; j < width; j++){
@@ -132,9 +134,13 @@ class Game{
 
 	next(){
 		clearInterval(interval);
-		freq = 1/(document.getElementById("freqSlider").value);
-		if (freq !== 0){
-			interval = setInterval(function(){g.next()}, freq*1000);
+		if (JSON.stringify(g.board) === JSON.stringify(empty)){
+			return;
+		}else{
+			freq = 1/(document.getElementById("freqSlider").value);
+			if (freq !== 0){
+				interval = setInterval(function(){g.next()}, freq*1000);
+			}
 		}
 		this.tempBoard = JSON.parse(JSON.stringify(this.board))
 		c.fillStyle = "green";

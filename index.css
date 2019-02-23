@@ -1,0 +1,10 @@
+#body_5194_0{overflow-x: scroll;}
+#seedDiv{display: none;}
+#getSeed{display: none;}
+#edit{display: none}
+#setup{padding: 50px 0px 50px 0px; overflow-x: hidden;}
+#submit{display: none}
+#canv{padding: 50px 0px 50px 0px; display: none;}
+#controls{display: none;}
+#text{position: absolute;left:50%;top:5px;width:40%}
+#inputsForSeeds{position: absolute; right: 1000000px}
